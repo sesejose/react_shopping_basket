@@ -3,7 +3,7 @@ export default function Product(props) {
     <>
       <div className="Product">
         <img className="Image" src={`https://kea-alt-del.dk/t7/images/webp/640/${props.data.id}.webp`} alt="" />
-        <p className="Name">{props.data.roductdisplayname}</p>
+        <p className="Name">{props.data.productdisplayname}</p>
         <div className="Price_Add-to-Card">
           <p className="Price">DKK {props.data.price}</p>
           <button
@@ -12,7 +12,7 @@ export default function Product(props) {
               // We send the product (an object named "data") to the function addProduct in App.jsx
             }}
           >
-            BUY
+            TILFØJ
           </button>
         </div>
       </div>

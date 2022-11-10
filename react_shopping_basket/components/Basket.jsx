@@ -5,7 +5,13 @@ export default function Basket(props) {
         <legend>Basket</legend>
         <div>
           <div>Products in the basket:</div>
-          {/* <div>{props.products}</div> */}
+          <ul>
+            {props.cart.map((item) => (
+              <li>
+                {item.productdisplayname} x {item.amount}, DKK {item.amount * item.price}
+              </li>
+            ))}
+          </ul>
         </div>
       </fieldset>
     </>

@@ -18,19 +18,41 @@ function App() {
     getData();
   }, []);
 
-  // Function to be executed by the button in the basket
+  // Function called by the button in the Product.jsx
   // data is the product --> Is the argument in the callback function (props.data)
   // We named it data because it is what Dev Tools shows --> props/data: and object with properties/values
   function addProduct(data) {
     // console.log("Add product:", data);
     const newProduct = { data };
     setProducts((emptyArray) => emptyArray.concat(newProduct));
+    //Do we have the product ??
+    if (cart.find((item) => item.id === data.id)) {
+      // Checking if there in the basket is already an item with the same id (equal to the data/product added).
+      console.log("it's there"); // If there is console, if not add it.
+      // Map --> (We're still in addProduct) We loop through the array.
+      setCart((array) =>
+        array.map((item) => {
+          if (item.id !== data.id) {
+            // If the item has a different id from those in basket, so add item
+            return item;
+          }
+          // But if it is not different (and is equal) create a copy and increase the amount by 1
+          else {
+            const copy = { ...item }; // Spread the copy to find amount.
+            copy.amount = copy.amount + 1;
+            return copy; // When it is working set the list in the Basket.jsx.
+          }
+        })
+      );
+    } else {
+      setCart((array) => array.concat({ ...data, amount: 1 }));
+    }
   }
 
   return (
     <div className="App">
       <ListProducts products={products} addProduct={addProduct} />
-      <Basket products={products} />
+      <Basket products={products} cart={cart} />
       <button>LOAD MORE</button>
     </div>
   ); // Return ends
