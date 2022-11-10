@@ -4,8 +4,8 @@ import Basket from "../components/Basket";
 
 function App() {
   const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
   // const [page, setPage] = useState(0);
-  // const [cards, setCards] = useState([]);
 
   // Fetching the data
   useEffect(() => {
@@ -19,15 +19,17 @@ function App() {
   }, []);
 
   // Function to be executed by the button in the basket
-  // function addProduct(products) {
-  //   console.log(`Add product ${products}`);
-  //   const newProduct = [];
-  //   setProducts((emptyArray) => emptyArray.concat(newProduct));
-  // }
+  // data is the product --> Is the argument in the callback function (props.data)
+  // We named it data because it is what Dev Tools shows --> props/data: and object with properties/values
+  function addProduct(data) {
+    // console.log("Add product:", data);
+    const newProduct = { data };
+    setProducts((emptyArray) => emptyArray.concat(newProduct));
+  }
 
   return (
     <div className="App">
-      <ListProducts products={products} />
+      <ListProducts products={products} addProduct={addProduct} />
       <Basket products={products} />
       <button>LOAD MORE</button>
     </div>

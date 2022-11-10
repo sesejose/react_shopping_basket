@@ -2,11 +2,18 @@ export default function Product(props) {
   return (
     <>
       <div className="Product">
-        <img className="Image" src={`https://kea-alt-del.dk/t7/images/webp/640/${props.id}.webp`} alt="" />
-        <p className="Name">{props.productdisplayname}</p>
+        <img className="Image" src={`https://kea-alt-del.dk/t7/images/webp/640/${props.data.id}.webp`} alt="" />
+        <p className="Name">{props.data.roductdisplayname}</p>
         <div className="Price_Add-to-Card">
-          <p className="Price">{props.price}</p>
-          {/* <button onClick={() => props.addProduct(props.id)}>ADD TO CART</button> */}
+          <p className="Price">DKK {props.data.price}</p>
+          <button
+            onClick={() => {
+              props.addProduct(props.data);
+              // We send the product (an object named "data") to the function addProduct in App.jsx
+            }}
+          >
+            BUY
+          </button>
         </div>
       </div>
     </>
