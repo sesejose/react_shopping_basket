@@ -49,10 +49,36 @@ function App() {
     }
   }
 
+  function deleteCart(id) {
+    console.log(`Delete this ${id}`);
+    // Find and modify a product
+    setCart((array) => {
+      const amountCero = array.map((item) => {
+        if (item.id === id) {
+          return { ...item, amount: item.amount - 1 };
+        } else {
+          return item;
+        }
+      });
+      // console.log(amountCero);
+      const filtered = amountCero.filter((item) => {
+        return item.amount > 0;
+      });
+      return filtered;
+    });
+    // We knows that cart state was defined with setCart in the addProduct function.
+    // Here we define that state ( cart ) again and say: take the array and return the item as value:variable
+    // This is , that value would be the a return from a map.
+    // const = array.map(item) --> loop thorugh this --> and return the item.
+    // If that item has the same id that the id that was passed into the function as paramenter with the button --> Change the amount -1
+    // If it has a different id return the item (this is keep it).
+    // Now we need to filter (discard) that item obtined with amount:0 and return those with amount greater than Cer0.
+  }
+
   return (
     <div className="App">
       <ListProducts products={products} addProduct={addProduct} />
-      <Basket products={products} cart={cart} />
+      <Basket products={products} cart={cart} deleteCart={deleteCart} />
       <button>LOAD MORE</button>
     </div>
   ); // Return ends
