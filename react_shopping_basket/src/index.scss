@@ -99,7 +99,8 @@ button:focus-visible {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    align-items: baseline;
+    // align-items: center;
+    gap: 0.5rem;
   }
 
   .Price_Add-to-Card,
@@ -120,5 +121,8 @@ button:focus-visible {
 
   .Product img {
     object-fit: cover;
+  }
+  .Price {
+    margin: 0;
   }
 }
