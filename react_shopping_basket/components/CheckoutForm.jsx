@@ -1,36 +1,51 @@
 import React from "react";
-import { useRef } from "react"; // It allow us to go inside the DOM and select something.
+import { useRef, useState } from "react"; // It allow us to go inside the DOM and select something.
 import { insertOrder } from "../modules/db"; // It provides the function isertOrder.
 
 function CheckoutForm(props) {
   // We use props to receive the what comes from Basket --> Cart
+  const [paymentCompleted, setPaymentCompleted] = useState();
+  // 13. When the page loads the payment is not completed (false) --> But when we have a response from the server we want to set the payment to complete.
   const theForm = useRef(null);
-  function submit(e) {
+  // The const response await until the insertOrder fetchs the data, why? If it does not need the data to do the things.
+  async function submit(e) {
     e.preventDefault();
-    insertOrder({
+    const response = await insertOrder({
       name: theForm.current.elements.name.value,
       email: theForm.current.elements.email.value,
       address: theForm.current.elements.address.value,
       basket: props.cart, // This should be a JSON with an array of objects inside. // The cart state.
     });
+    console.log(response);
+    // We do something with the response returned from insertOrder().
+    if (response && response.length) {
+      // If response is not null AND has a length asumme that is an array (How??)
+      setPaymentCompleted(true);
+      // 14. Now we have a variable that we can use in our UI.
+    }
   }
   return (
     <>
-      <form onSubmit={submit} ref={theForm}>
-        <div className="FormControl">
-          <label htmlFor="form-name">Name</label>
-          <input required type="text" name="name" id="form-name"></input>
-        </div>
-        <div className="FormControl">
-          <label htmlFor="form-email">Email</label>
-          <input required type="text" name="email" id="form-email"></input>
-        </div>
-        <div className="FormControl">
-          <label htmlFor="form-address">Address</label>
-          <textarea required name="address" id="form-address"></textarea>
-        </div>
-        <button>PAY</button>
-      </form>
+      {/* 15. Ternary operator */}
+      {paymentCompleted ? (
+        <p>THANK YOU!!!</p>
+      ) : (
+        <form onSubmit={submit} ref={theForm}>
+          <div className="FormControl">
+            <label htmlFor="form-name">Name</label>
+            <input required type="text" name="name" id="form-name"></input>
+          </div>
+          <div className="FormControl">
+            <label htmlFor="form-email">Email</label>
+            <input required type="text" name="email" id="form-email"></input>
+          </div>
+          <div className="FormControl">
+            <label htmlFor="form-address">Address</label>
+            <textarea required name="address" id="form-address"></textarea>
+          </div>
+          <button>PAY</button>
+        </form>
+      )}
     </>
   );
 }
