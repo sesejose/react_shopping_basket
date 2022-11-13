@@ -5,7 +5,6 @@ import Basket from "../components/Basket";
 function App() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState([]);
-  // const [page, setPage] = useState(0);
 
   // Fetching the data
   useEffect(() => {

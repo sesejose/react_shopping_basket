@@ -1,8 +1,11 @@
+import { useState } from "react";
+import CheckoutForm from "./CheckoutForm";
 export default function Basket(props) {
   // When we click in the button in Product.jsx we call addProduct() that adds a item/cart to the basket.
   // Here in the basket we MAP that cart to get the name, price and amount.
   // When a new cart is added getTotal() runs.
   // Then TOTAL is updated with the return of that function.
+  const [showForm, setShowForm] = useState(false);
 
   function getTotal() {
     let total = 0;
@@ -36,6 +39,11 @@ export default function Basket(props) {
             ))}
           </ul>
           <h3>Total: {getTotal()},-</h3>
+          {/* onClick in the Event in the button that turns the state of the form to true */}
+          {/* The following are CONDITIONS and means --> if(showForm){<button....} */}
+          {!showForm && <button onClick={() => setShowForm(true)}>Buy now</button>}
+          {showForm && <CheckoutForm cart={props.cart} />}
+          {/* We send the cart state to the checkoutForm(). The Basket.jsx already knows about the cart, here at the getTotal we define its value. */}
         </div>
       </fieldset>
     </>
