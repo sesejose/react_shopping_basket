@@ -1,6 +1,6 @@
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 24px;
   font-weight: 400;
 
@@ -87,7 +87,7 @@ button:focus-visible {
     border: 1px solid #efefef;
     border-radius: 10px;
     width: 200px;
-    height: 500px;
+    height: 400px;
   }
   .Image {
     width: 100%;
@@ -106,6 +106,12 @@ button:focus-visible {
   .Price_Add-to-Card,
   .Name {
     padding: 0 1rem;
+  }
+
+  .Name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 3.5rem;
   }
 
   button {
